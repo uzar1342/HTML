@@ -192,7 +192,7 @@
           <!-- Slide 1-->
           <li data-transition="fade" data-speed="1000" data-prevslidecaption="Prev" data-nextslidecaption="Next">
             <div class="rev-slidebg" style="background-image: none;">
-              <video autoplay muted loop class="rev-slidebg-video" width="100%" poster="images/video-poster.jpg">
+              <video autoplay muted loop class="rev-slidebg-video v1" width="100%" poster="images/video-poster.jpg">
                 <source src="https://res.cloudinary.com/dxt9cf811/video/upload/v1732256484/aq3rydnqcvktcnrxfztu.mp4"
                   type="video/mp4">
                 <!-- <source src="path-to-your-video.webm" type="video/webm"> -->
@@ -230,8 +230,14 @@
           </li>
           <!-- End of Slide 1-->
           <!-- Slide 2-->
-          <li data-transition="fade" data-speed="1000" data-prevslidecaption="Prev" data-nextslidecaption="Next"><img
-              src="images/slide-02.jpg" alt="" />
+          <li data-transition="fade" data-speed="1000" data-prevslidecaption="Prev" data-nextslidecaption="Next">
+            <video autoplay muted loop class="rev-slidebg-video v2" width="100%" poster="images/video-poster.jpg">
+              <source src="https://res.cloudinary.com/dxt9cf811/video/upload/v1732265234/mtjai21cbxjufgv1sphf.mp4"
+                type="video/mp4">
+              <!-- <source src="path-to-your-video.webm" type="video/webm"> -->
+              <!-- Fallback for unsupported browsers -->
+              Your browser does not support the video tag.
+            </video>
             <!-- Layer 1-->
             <div data-x="right" data-y="center" data-width="['auto']" data-height="['auto']"
               data-hoffset="['0','30','30','30']" data-voffset="-55" data-fontsize="['14','14','14','14']"
@@ -310,6 +316,35 @@
         <!-- End Slider Actions -->
       </div>
     </div>
+
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const revSlider = document.querySelector('#rev-slider-2'); // RevSlider container
+        const videos = revSlider.querySelectorAll('video'); // Get all videos
+    
+        // Function to pause all videos
+        function pauseAllVideos() {
+          videos.forEach(video => {
+            video.pause();
+          });
+        }
+    
+        // Listen to slide change event
+        jQuery('#rev-slider-2').on('revolution.slide.onchange', function(event, data) {
+          // Pause all videos when slide changes
+          pauseAllVideos();
+    
+          // Play the video of the current slide
+          const currentSlide = data.slideIndex; // Get current slide index
+          const currentVideo = revSlider.querySelector(`.v${currentSlide}`);
+    
+          if (currentVideo) {
+            currentVideo.play(); // Play the video in the current slide
+          }
+        });
+      });
+    </script>
     <!-- End of Slider-->
     <!-- Content Section-->
     <div data-bg-img-src="images/page-bg-img-4.png" class="apo-section apo-fullheight-section">
